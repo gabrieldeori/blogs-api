@@ -1,14 +1,12 @@
-const schemas = require('../schemas');
-
-function validateUser(user) {
-  const userValidation = schemas.user.validate(user);
-  if (userValidation.error) {
-    return userValidation.error;
-  }
-}
+const { StatusCodes } = require('http-status-codes');
+const { tokenOperations } = require('../utils');
 
 function userCreate(user) {
-  return validateUser(user);
+  tokenOperations.generate(user);
+  return {
+    statusCode: StatusCodes.CREATED,
+    responseMessage: { token: 'TOKENNNNXXaksjflkajsf' },
+  };
 }
 
 module.exports = userCreate;
