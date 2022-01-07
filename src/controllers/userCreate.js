@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes');
 const services = require('../services');
 const { tokenOperations } = require('../utils');
 
@@ -14,6 +15,9 @@ function userCreate(req, res, nex) {
   // Se der errado retornar nex(erro)
 
   // Retornar jwt
+  const tokenInfos = { userInfos: { email } };
+  const newToken = tokenOperations.generate(tokenInfos);
+  res.status(StatusCodes.CREATED).json({ token: newToken });
 }
 
 module.exports = userCreate;
