@@ -2,8 +2,9 @@ const services = require('../services');
 
 function userCreate(req, res) {
   const { displayName, email, password, image } = req.body;
-  services.userCreate();
-  res.status(200).json({ displayName, email, password, image });
+  const user = { displayName, email, password, image };
+  const responseOfService = services.userCreate(user);
+  res.status(200).json(responseOfService);
 }
 
 module.exports = userCreate;
