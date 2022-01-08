@@ -10,6 +10,7 @@ function userCreate(req, res, nex) {
   if (validateUser.error) {
     const { statusCode, error } = validateUser;
     nex({ statusCode, message: error });
+    return null;
   }
   // Adicionar usuário ao banco
   // Se der errado retornar nex(erro)
@@ -18,6 +19,7 @@ function userCreate(req, res, nex) {
   const tokenInfos = { userInfos: { email } };
   const newToken = tokenOperations.generate(tokenInfos);
   res.status(StatusCodes.CREATED).json({ token: newToken });
+  return null;
 }
 
 module.exports = userCreate;
