@@ -3,9 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const secret = process.env.JWT_SECRET || 'qualquertokendeteste';
 
-function generate(tokenInfos) {
-  const { userInfos: { email } } = tokenInfos;
-
+function generate(email) {
   const jwtConfig = {
     algorithm: 'HS256',
   };
