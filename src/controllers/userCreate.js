@@ -1,24 +1,17 @@
-const { StatusCodes } = require('http-status-codes');
 const services = require('../services');
-const { tokenOperations } = require('../utils');
 
 function userCreate(req, res, nex) {
   const { displayName, email, password, image } = req.body;
-  const user = { displayName, email, password, image };
-  
-  const validateUser = services.userValidation(user);
+  const validateUser = services.userValidation({ displayName, email, password, image });
   if (validateUser.error) {
-    const { statusCode, error } = validateUser;
-    nex({ statusCode, message: error });
-    return null;
+    nex(validateUser);
   }
-  // Adicionar usuário ao banco
-  // Se der errado retornar nex(erro)
-
-  // Retornar jwt
-  const tokenInfos = { userInfos: { email } };
-  const newToken = tokenOperations.generate(tokenInfos);
-  res.status(StatusCodes.CREATED).json({ token: newToken });
+  const addedUser = services.userCreate({ displayName, email, password, image });
+  if (addedUser.error) {
+    nex(addedUser);
+  }
+  const { statusCode, token } = addedUser;
+  res.status(statusCode).json({ token });
   return null;
 }
 
