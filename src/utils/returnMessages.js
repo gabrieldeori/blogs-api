@@ -10,7 +10,13 @@ const emailConflict = {
   error: 'User already registered',
 };
 
+const genericLogin = {
+  statusCode: StatusCodes.BAD_REQUEST,
+  message: 'Invalid fields',
+};
+
 module.exports = {
-  internalServerError,
   emailConflict,
+  genericLogin,
+  internalServerError,
 };
