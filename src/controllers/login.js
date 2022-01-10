@@ -7,11 +7,11 @@ async function loginUser(req, res, nex) {
     console.log('Existe chave error');
     const { statusCode, error } = validateLogin;
     nex(validateLogin); // Não funciona
+    // função nex decidiu não funcionar. Apenas nessa interação. | Funciona em userCreate.js
     // nex({ statusCode, error }); // Não funciona
     // nex({ validateLogin }); // não funciona obviamente
     // nex(statusCode, error); // não funciona obviamente
-    // res.status(statusCode).json({ error }); // função nex decidiu não funcionar. Indeterminado.
-    // funciona em userCreate
+    res.status(statusCode).json({ error }); // Assim funciona perfeitamente. :p
     return null;
   }
   const loggedUser = await services.login({ email, password });
