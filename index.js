@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = require('./src/routers');
+const { error } = require('./src/middleware');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/ping', router.ping);
 app.use('/user', router.user);
 app.use('/login', router.login);
+app.use(error);
 
 // não remova esse endpoint, e para o avaliador funcionar //
 app.get('/', (_request, response) => {
