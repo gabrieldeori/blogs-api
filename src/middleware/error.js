@@ -1,5 +1,6 @@
-module.exports = (err, _req, res, _nex) => {
+const errorHandler = (err, _req, res, _nex) => {
   if (err.error) {
+    console.log('error');
     const { statusCode, error } = err;
     res.status(statusCode).json({ message: error });
     return null;
@@ -8,3 +9,5 @@ module.exports = (err, _req, res, _nex) => {
   res.status(statusCode).json({ message });
   return null;
 };
+
+module.exports = errorHandler;

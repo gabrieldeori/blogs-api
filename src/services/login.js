@@ -7,7 +7,8 @@ async function login({ email, password }) {
   try {
     const hasUser = await User.findOne({ where: { email } });
     if (!hasUser) return (genericLogin);
-    if (hasUser.password !== password) return (genericLogin);
+    const { password: authenticPassword } = hasUser;
+    if (authenticPassword !== password) return (genericLogin);
     const token = tokenOperations.generate(email);
     if (token) return ({ statusCode: StatusCodes.OK, token });
   } catch (e) {
