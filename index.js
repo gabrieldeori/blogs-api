@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.use('/ping', router.ping);
 app.use('/user', router.user);
+app.user('/login', router.login);
 
 // não remova esse endpoint, e para o avaliador funcionar //
 app.get('/', (_request, response) => {

@@ -1,25 +1,20 @@
-const { StatusCodes, ReasonPhrases } = require('http-status-codes');
+const { StatusCodes } = require('http-status-codes');
+const { internalServerError, emailConflict } = require('../utils/returnMessages');
 const { User } = require('../models');
 const { tokenOperations } = require('../utils');
 
 async function userCreate(displayName, email, password, image) {
   try {
+    const hasUser = await User.findOne({ where: { email } });
+    if (hasUser) return (emailConflict);
     const addUser = await User.create({ displayName, email, password, image });
-    if (!addUser) {
-      return ({
-        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-        error: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
+    if (!addUser) return (internalServerError);
     const token = tokenOperations.generate(email);
-    return ({ statusCode: StatusCodes.CREATED, token });
+    if (token) return ({ statusCode: StatusCodes.CREATED, token });
   } catch (e) {
     console.log(e);
   }
-  return ({
-    statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-    error: ReasonPhrases.INTERNAL_SERVER_ERROR,
-  });
+  return (internalServerError);
 }
 
 module.exports = userCreate;
