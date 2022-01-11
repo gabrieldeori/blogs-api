@@ -23,10 +23,16 @@ const tokenInvalidExpired = {
   error: 'Expired or invalid token',
 };
 
+const userNotExist = {
+  statusCode: StatusCodes.NOT_FOUND,
+  error: 'User does not exist',
+};
+
 module.exports = {
   emailConflict,
   genericLogin,
   internalServerError,
   tokenInvalidExpired,
   tokenNotFound,
+  userNotExist,
 };
