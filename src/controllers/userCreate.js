@@ -4,7 +4,6 @@ async function userCreate(req, res, nex) {
   const { displayName, email, password, image } = req.body;
   const validateUser = services.userValidation({ displayName, email, password, image });
   if (validateUser.error) {
-    console.log(validateUser);
     nex(validateUser);
     return null;
   }
