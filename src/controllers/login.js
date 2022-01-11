@@ -4,7 +4,6 @@ async function loginUser(req, res, nex) {
   const { email, password } = req.body;
   const validateLogin = services.loginValidation({ email, password });
   if (validateLogin.error) {
-    console.log('Existe chave error');
     return nex(validateLogin);
   }
   const loggedUser = await services.login({ email, password });
