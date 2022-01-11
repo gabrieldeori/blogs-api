@@ -13,8 +13,20 @@ const internalServerError = {
   error: ReasonPhrases.INTERNAL_SERVER_ERROR,
 };
 
+const tokenNotFound = {
+  statusCode: StatusCodes.UNAUTHORIZED,
+  error: 'Token not found',
+};
+
+const tokenInvalidExpired = {
+  statusCode: StatusCodes.UNAUTHORIZED,
+  error: 'Expired or invalid token',
+};
+
 module.exports = {
   emailConflict,
   genericLogin,
   internalServerError,
+  tokenInvalidExpired,
+  tokenNotFound,
 };
