@@ -12,4 +12,18 @@ function loginValidation({ email, password }) {
   return ({ email, password });
 }
 
-module.exports = loginValidation;
+function userValidation(user) {
+  const joiValidation = schemas.user.validate(user);
+  if (joiValidation.error) {
+    return {
+      statusCode: StatusCodes.BAD_REQUEST,
+      error: joiValidation.error.details[0].message,
+    };
+  }
+  return user;
+}
+
+module.exports = {
+  loginValidation,
+  userValidation,
+};

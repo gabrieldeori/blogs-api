@@ -1,15 +1,13 @@
 const login = require('./login');
-const loginValidation = require('./loginValidation');
+const validations = require('./validations');
 const userCreate = require('./userCreate');
-const userValidation = require('./userValidation');
 const userGetByID = require('./userGetByID');
 const userGetAll = require('./userGetAll');
 
 module.exports = {
   login,
-  loginValidation,
+  validations,
   userCreate,
   userGetAll,
   userGetByID,
-  userValidation,
 };

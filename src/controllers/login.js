@@ -2,7 +2,7 @@ const services = require('../services');
 
 async function loginUser(req, res, nex) {
   const { email, password } = req.body;
-  const validateLogin = services.loginValidation({ email, password });
+  const validateLogin = services.validations.loginValidation({ email, password });
   if (validateLogin.error) {
     return nex(validateLogin);
   }
