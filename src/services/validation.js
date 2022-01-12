@@ -1,15 +1,14 @@
 const { StatusCodes } = require('http-status-codes');
-const schemas = require('../schemas');
 
-function userValidation(user) {
-  const joiValidation = schemas.user.validate(user);
+function validation(dataObject, schema) {
+  const joiValidation = schema.validate(dataObject);
   if (joiValidation.error) {
     return {
       statusCode: StatusCodes.BAD_REQUEST,
       error: joiValidation.error.details[0].message,
     };
   }
-  return user;
+  return dataObject;
 }
 
-module.exports = userValidation;
+module.exports = validation;

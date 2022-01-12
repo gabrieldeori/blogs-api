@@ -1,21 +1,20 @@
 const services = require('../services');
+const { user } = require('../schemas');
 
 async function userCreate(req, res, nex) {
   const { displayName, email, password, image } = req.body;
-  const validateUser = services.validations.userValidation({ displayName, email, password, image });
+  const userData = { displayName, email, password, image };
+  const validateUser = services.validation(userData, user);
   if (validateUser.error) {
-    nex(validateUser);
-    return null;
+    return nex(validateUser);
   }
   
-  const addedUser = await services.userCreate(displayName, email, password, image);
+  const addedUser = await services.userCreate(userData);
   if (addedUser.error) {
-    nex(addedUser);
-    return null;
+    return nex(addedUser);
   }
   const { statusCode, token } = addedUser;
-  res.status(statusCode).json({ token });
-  return null;
+  return res.status(statusCode).json({ token });
 }
 
 module.exports = userCreate;
