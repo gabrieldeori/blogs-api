@@ -23,7 +23,19 @@ function userValidation(user) {
   return user;
 }
 
+function categoryValidation(name) {
+  const joiValidation = schemas.category.validate({ name });
+  if (joiValidation.error) {
+    return {
+      statusCode: StatusCodes.BAD_REQUEST,
+      error: joiValidation.error.details[0].message,
+    };
+  }
+  return name;
+}
+
 module.exports = {
+  categoryValidation,
   loginValidation,
   userValidation,
 };
