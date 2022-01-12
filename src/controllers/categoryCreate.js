@@ -12,7 +12,7 @@ async function categoryCreate(req, res, nex) {
   } catch (e) {
     console.log(e);
   }
-  return internalServerError;
+  return nex(internalServerError);
 }
 
 module.exports = categoryCreate;
