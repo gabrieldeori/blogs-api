@@ -1,12 +1,14 @@
 const services = require('../services');
 const schemas = require('../schemas');
 
-function createPost(req, res, nex) {
+async function createPost(req, res, nex) {
+  const { authorization } = req.headers;
   const { title, content, categoryIds } = req.body;
-  const postContent = { title, content, categoryIds };
-  const validatePostContent = services.validation(postContent, schemas.post);
-  if (validatePostContent.error) return nex(validatePostContent);
-  return res.json({ message: 'hello by controller', validatePostContent });
+  const validPost = services.validation({ title, content, categoryIds }, schemas.post);
+  if (validPost.error) return nex(validPost);
+  const { id: userId } = await services.findUserWithToken(authorization);
+  const createdPost = await services.postCreate({ userId, title, content });
+  return res.json(createdPost);
 }
 
 module.exports = createPost;
