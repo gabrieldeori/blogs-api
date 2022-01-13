@@ -20,6 +20,7 @@ app.use('/ping', router.ping);
 app.use('/user', router.user);
 app.use('/login', router.login);
 app.use('/categories', router.categories);
+app.use('/post', router.post);
 app.use(error);
 
 // não remova esse endpoint, e para o avaliador funcionar //
