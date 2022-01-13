@@ -1,5 +1,5 @@
-async function postCreate(content) {
-  return { id: 1, ...content };
+async function postCreate(data) {
+  return { id: 1, ...data };
 }
 
 module.exports = postCreate;

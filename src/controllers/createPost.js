@@ -7,7 +7,7 @@ async function createPost(req, res, nex) {
   const validPost = services.validation({ title, content, categoryIds }, schemas.post);
   if (validPost.error) return nex(validPost);
   const { id: userId } = await services.findUserWithToken(authorization);
-  const createdPost = await services.postCreate({ userId, title, content });
+  const createdPost = await services.postCreate({ userId, title, content, categoryIds });
   return res.json(createdPost);
 }
 
