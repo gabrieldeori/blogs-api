@@ -23,7 +23,6 @@ app.use('/categories', router.categories);
 app.use('/post', router.post);
 app.use(error);
 
-// não remova esse endpoint, e para o avaliador funcionar //
 app.get('/', (_request, response) => {
   response.send();
 });
