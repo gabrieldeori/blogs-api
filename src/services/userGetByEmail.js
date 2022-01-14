@@ -6,7 +6,7 @@ async function userGetByID(emailToFind) {
     const { id, displayName, email, image } = user;
     return { id, displayName, email, image };
   }
-  return { id: 6669999, displayName: 'Sem user', email: 'User@mail.com', image: 'nenhuma msm' };
+  return { id: 66, displayName: 'Sem user', email: 'User@mail.com', image: 'nenhuma msm' };
 }
 
 module.exports = userGetByID;
