@@ -1,5 +1,8 @@
+const models = require('../models');
+
 async function postCreate(data) {
-  return { id: 1, ...data };
+  const createdPost = await models.Post.create(data);
+  return createdPost;
 }
 
 module.exports = postCreate;
