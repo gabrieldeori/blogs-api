@@ -16,7 +16,6 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -24,7 +23,17 @@ module.exports = {
           model: 'Users',
           key: 'id',
         }
-      }
+      },
+      published: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
+      updated: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
     });
   },
   down: async (queryInterface, _Sequelize) => {

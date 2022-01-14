@@ -8,8 +8,9 @@ async function createPost(req, res, nex) {
     const { title, content, categoryIds } = req.body;
     const validPost = services.validation({ title, content, categoryIds }, schemas.post);
     if (validPost.error) return nex(validPost);
-    const createdPost = await services.postCreate(authorization, { title, content });
-    return res.json(createdPost);
+    const createdPost = await services.postCreate(authorization, { title, content, categoryIds });
+    if (createdPost.error) return nex(createdPost);
+    return res.status(201).json(createdPost);
   } catch (e) {
     console.log(e);
   }
