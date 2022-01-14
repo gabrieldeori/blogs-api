@@ -18,7 +18,7 @@ async function postCreate(authorization, { title, content, categoryIds }) {
   const compatibleArray = checkCategories(categoryIds, categoryList);
   if (!compatibleArray) return categoryIdsNotFound;
   const { id: userId } = await findUserWithToken(authorization);
-  const createdPost = await models.Post.create({
+  const createdPost = await models.BlogPost.create({
     title, content, userId, published: new Date(), updated: new Date() });
   return createdPost;
 }
